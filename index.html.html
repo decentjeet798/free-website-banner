@@ -50,6 +50,16 @@
     isolation:isolate;
   }
 
+  /* On narrow / mobile screens the banner grows to fit stacked content
+     instead of staying locked to the wide 1200x630 ratio (which caused
+     text and badges to overlap when the layout collapsed to one column). */
+  @container (max-width: 680px){
+    .banner{
+      aspect-ratio: auto;
+      height: auto;
+    }
+  }
+
   /* ---------- decorative backdrop ---------- */
 
   .dot-grid{
@@ -304,13 +314,88 @@
     opacity:0.9;
   }
 
-  @container (max-width: 640px){
-    .content{ flex-direction:column; padding-top: 12cqw; }
-    .copy{ width:100%; text-align:center; padding-top:0; }
-    .subhead{ max-width:none; margin-left:auto; margin-right:auto; }
-    .chips{ justify-content:center; }
-    .visual{ width:100%; margin-top:4cqw; }
-    .footer-strip{ flex-direction:column; gap:0.5cqw; height:auto; padding: 2cqw 5.6cqw; text-align:center; }
+  @container (max-width: 680px){
+
+    /* Stop stacking everything with position:absolute on one fixed-height
+       plate — let the banner flow top-to-bottom instead so text, the
+       laptop graphic and the footer never sit on top of each other. */
+    .india-pill,
+    .content,
+    .footer-strip{
+      position:static;
+    }
+
+    .banner{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .india-pill{
+      align-self:center;
+      margin: 7cqw auto 0;
+      font-size: 3.1cqw;
+      padding: 1.8cqw 3.4cqw;
+    }
+    .india-pill .dot{ width:1.6cqw; height:1.6cqw; }
+
+    .content{
+      flex-direction:column;
+      align-items:center;
+      padding: 5cqw 6.5cqw 3cqw;
+      gap: 5cqw;
+    }
+
+    .copy{
+      width:100%;
+      text-align:center;
+      padding-top:0;
+    }
+
+    .eyebrow{ font-size: 3cqw; margin-bottom: 2.4cqw; }
+    h1{ font-size: 9.5cqw; margin-bottom: 3cqw; }
+    .subhead{
+      font-size: 3.6cqw;
+      max-width: 92%;
+      margin-left:auto; margin-right:auto;
+      margin-bottom: 4cqw;
+    }
+
+    .chips{ justify-content:center; gap: 2cqw; margin-bottom: 4.5cqw; }
+    .chip{ font-size: 2.9cqw; padding: 1.6cqw 2.4cqw 1.6cqw 1.7cqw; }
+    .chip svg{ width:3.2cqw; height:3.2cqw; }
+
+    .cta{ font-size: 3.8cqw; padding: 2.8cqw 4.6cqw; gap:1.8cqw; }
+    .cta svg{ width:3.6cqw; height:3.6cqw; }
+    .no-card{ font-size: 2.5cqw; margin-top:2.6cqw; }
+
+    .visual{
+      width:100%;
+      height:auto;
+      padding: 2cqw 0 8cqw;
+    }
+    .laptop{ width: 60cqw; }
+
+    .badge{
+      font-size: 2.5cqw;
+      padding: 1.4cqw 2cqw;
+      gap: 1cqw;
+      border-radius: 2.2cqw;
+    }
+    .badge svg{ width:3cqw; height:3cqw; }
+    .badge.free{ top: 1cqw; left: 2cqw; }
+    .badge.trust{ top: 3cqw; right: 2cqw; }
+    .badge.rank{ bottom: 2cqw; right: 2cqw; }
+
+    .footer-strip{
+      flex-direction:column;
+      gap:1.4cqw;
+      height:auto;
+      padding: 4cqw 6.5cqw;
+      text-align:center;
+      background: rgba(6,18,40,0.6);
+    }
+    .brandline{ font-size: 2.8cqw; }
+    .urgency{ font-size: 2.5cqw; }
   }
 </style>
 </head>
